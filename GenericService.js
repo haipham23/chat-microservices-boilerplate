@@ -8,6 +8,7 @@ const cors = require('cors');
 class GenericService {
   constructor(options) {
     this.app = express();
+    this.routers = express.Router();
     this.options = options;
   }
 
@@ -18,7 +19,11 @@ class GenericService {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
-    this.app.use('/', this.options.routes);
+    this.options.routes.forEach((route) => {
+      this.routers[route.method](route.path, route.func);
+    });
+
+    this.app.use(this.routers);
 
     // catch 404 and forward to error handler
     this.app.use((req, res) => res.status(404).json('404'));
