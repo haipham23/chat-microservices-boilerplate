@@ -36,7 +36,7 @@ class GenericService {
       mongoose.connect(this.options.mongoUrl);
     }
 
-    this.app.listen(this.options.port, () => logger.info(`Connected to port ${PORT}`));
+    this.app.listen(this.options.port, () => logger.info(`Connected to port ${this.options.port}`));
   }
 }
 
