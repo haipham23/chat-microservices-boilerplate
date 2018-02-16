@@ -33,7 +33,9 @@ class GenericService {
 
     if (this.options.mongoUrl) {
       mongoose.Promise = Promise;
-      mongoose.connect(this.options.mongoUrl);
+      mongoose
+        .connect(this.options.mongoUrl)
+        .then(() => logger.info('Connected to MongoDB'));
     }
 
     this.app.listen(this.options.port, () => logger.info(`Connected to port ${this.options.port}`));
