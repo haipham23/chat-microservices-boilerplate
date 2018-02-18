@@ -20,7 +20,7 @@ class GenericService {
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
     this.options.routes.forEach((route) => {
-      this.routers[route.method](route.path, route.func);
+      this.routers[route.method](route.path, route.middlewares, route.func);
     });
 
     this.app.use(this.routers);
